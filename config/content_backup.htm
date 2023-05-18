@@ -5,29 +5,394 @@
 <p>40923219 nfu<span>40923219</span></p>
 <p>40923225 nfu40923225@nfu.edu.tw</p>
 <p>40923246 40923246</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Jz39RTQherg" title="YouTube video player" width="560"></iframe></p>
 <h1>pj2</h1>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Jz39RTQherg" title="YouTube video player" width="560"></iframe></p>
+<p><a href="/downloads/zmq_bubbleRob_4cars_board.ttt">4cars.ttt檔</a></p>
+<p><a href="/downloads/瀏覽器中計分板設計 (.7z含場景與控制程式).7z">瀏覽器中計分板設計 (.7z含場景與控制程式)</a></p>
+<hr/>
 <p>分工情況:</p>
-<p>40723217</p>
-<p>40923219</p>
-<p>40923225 </p>
-<p>40923246</p>
-<p>1.繪製得分記分板</p>
+<p>40723217：進球、位置重置程式設計，四台車控制程式，影片</p>
+<p>40923219：記分板程式修改、影片，<span>報告</span></p>
+<p>40923225：場景球場繪製，虛擬主機連線，報告</p>
+<p>40923246：場景記分板繪製﹐記分板程式設計，報告</p>
+<p>場景</p>
+<p>在solidworks繪製</p>
+<p><img alt="" height="326" src="/images/W13-場景.png" width="660"/></p>
+<p><a href="/downloads/01111.STL">場景.STL檔</a></p>
+<p>記分板</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/mhgDF8kXEXE" title="YouTube video player" width="560"></iframe></p>
 <p>使用<strong>CoppeliaSim</strong>繪製記分板</p>
-<p>記分板尺寸</p>
-<p><img alt="" height="359" src="/images/0517-1.png" width="675"/></p>
-<p><span>*記分板檔案(給檔案連結)*</span></p>
-<p><span>2.記分板程式</span></p>
-<p>function sysCall_init()<br/> bubbleRob1 = sim.getObject('./bubbleRob1')<br/> bubbleRob2 = sim.getObject('./bubbleRob2')<br/> sensor = sim.getObject('./sensor')<br/> sensor2 = sim.getObject('./sensor2')<br/> ball = sim.getObject('./ball')<br/> <br/> pos1 = {-1,0,0.15}<br/> pos2 = {1,0,0.15}<br/> posS = {0,0,0.15}<br/> ang1 = {0,0,0}<br/> ang2 = {0,0,3.14}<br/> bubbleRobBase = 4<br/> initialBubbleRobPosition = sim.getObjectPosition(bubbleRobBase, -1)<br/> initialBubbleRobOrientation = sim.getObjectOrientation(bubbleRobBase, -1)<br/> initialballPosition = sim.getObjectPosition(ball, -1)<br/> initialballOrientation = sim.getObjectOrientation(ball, -1) <br/> <br/> count = 14400 <br/> score1 = 0<br/> score2 = 0<br/> score3 = 0<br/> score4 = 0<br/> <br/> s0={1,1,1,1,1,0,1}<br/> s1={0,0,1,1,0,0,0}<br/> s2={0,1,1,0,1,1,1}<br/> s3={0,0,1,1,1,1,1}<br/> s4={1,0,1,1,0,1,0}<br/> s5={1,0,0,1,1,1,1}<br/> s6={1,1,0,1,1,1,1}<br/> s7={0,0,1,1,1,0,0}<br/> s8={1,1,1,1,1,1,1}<br/> s9={1,0,1,1,1,1,1}<br/> s={s0,s1,s2,s3,s4,s5,s6,s7,s8,s9}<br/> for j = 0,6,1 do<br/> a = sim.getObject('./_G['..j..']')<br/> if (s[1][j+1]==1) then<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})<br/> else<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> for j = 0,6,1 do<br/> b = sim.getObject('./G_['..j..']')<br/> if (s[1][j+1]==1) then<br/> sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})<br/> else<br/> sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> for j = 0,6,1 do<br/> d = sim.getObject('./_R['..j..']')<br/> if (s[1][j+1]==1) then<br/> sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})<br/> else<br/> sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> for j = 0,6,1 do<br/> c = sim.getObject('./R_['..j..']')<br/> if (s[1][j+1]==1) then<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})<br/> else<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/>end<br/>function sysCall_actuation()<br/> result = sim.readProximitySensor(sensor) <br/> print(s[i]) <br/> if(result&gt;0)then<br/> sim.setObjectPosition(ball, -1, initialballPosition)<br/> sim.setObjectOrientation(ball, -1, initialballOrientation)<br/> sim.setObjectPosition(bubbleRob1, -1, pos1)<br/> sim.setObjectPosition(bubbleRob2, -1, pos2)<br/> sim.setObjectOrientation(bubbleRob1, -1, ang1)<br/> sim.setObjectOrientation(bubbleRob2, -1, ang2)<br/> score1 = score1 + 1<br/> if (score1 &lt;= 9) then<br/> i = score1 +1<br/> <br/> for j = 0, 6, 1 do<br/> a = sim.getObject('./_G['..j..']') <br/> if (s[i][j+1] == 1) then<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})<br/> else<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> <br/> <br/> elseif (score1 &gt; 9 and score2&lt;=9) then<br/> score1 = 0<br/> for j = 0, 6, 1 do<br/> a = sim.getObject('./_G['..j..']') <br/> if (s[1][j+1] == 1) then<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})<br/> else<br/> sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> <br/> score2 = score2 + 1<br/> i = score2 +1<br/> <br/> for j = 0, 6, 1 do<br/> b = sim.getObject('./G_['..j..']')<br/> if (s[i][j+1] == 1) then<br/> sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})<br/> else<br/> sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> <br/> <br/> else<br/> sim.pauseSimulation()<br/> end <br/> end <br/> result2 = sim.readProximitySensor(sensor2) <br/> if(result2&gt;0)then<br/> sim.setObjectPosition(ball, -1, initialballPosition)<br/> sim.setObjectOrientation(ball, -1, initialballOrientation)<br/> sim.setObjectPosition(bubbleRob1, -1, pos1)<br/> sim.setObjectPosition(bubbleRob2, -1, pos2)<br/> sim.setObjectOrientation(bubbleRob1, -1, ang1)<br/> sim.setObjectOrientation(bubbleRob2, -1, ang2)<br/> score3 = score3 + 1<br/> <br/> if (score3 &lt;= 9) then<br/> i = score3 +1<br/> for j = 0, 6, 1 do<br/> c = sim.getObject('./_R['..j..']')<br/> if (s[i][j+1] == 1) then<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})<br/> else<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> <br/> <br/> elseif (score3 &gt; 9 and score4&lt;=9) then<br/> score3 = 0<br/> for j = 0, 6, 1 do<br/> c = sim.getObject('./_R['..j..']')<br/> if (s[1][j+1] == 1) then<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})<br/> else<br/> sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end<br/> score4 = score4 + 1<br/> <br/> i = score4 +1<br/> for j = 0, 6, 1 do<br/> d = sim.getObject('./R_['..j..']')<br/> if (s[i][j+1] == 1) then<br/> sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})<br/> else<br/> sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})<br/> end<br/> end <br/> else<br/> sim.pauseSimulation()<br/> end<br/> end<br/>end</p>
-<p>-----------</p>
+<p><img alt="" height="309" src="/images/W13-記分板尺寸.png" width="561"/></p>
+<p><span><a href="/downloads/board_test.ttt">記分板.ttt檔</a></span></p>
+<p><span>程式</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+bubbleRob1 = sim.getObject('./bubbleRob1')
+bubbleRob2 = sim.getObject('./bubbleRob2')
+sensor = sim.getObject('./sensor')
+sensor2 = sim.getObject('./sensor2')
+ball = sim.getObject('./ball')
+
+pos1 = {-1,0,0.15}
+pos2 = {1,0,0.15}
+posS = {0,0,0.15}
+ang1 = {0,0,0}
+ang2 = {0,0,3.14}
+bubbleRobBase = 4
+initialBubbleRobPosition = sim.getObjectPosition(bubbleRobBase, -1)
+initialBubbleRobOrientation = sim.getObjectOrientation(bubbleRobBase, -1)
+initialballPosition = sim.getObjectPosition(ball, -1)
+initialballOrientation = sim.getObjectOrientation(ball, -1)
+
+count = 14400
+score1 = 0
+score2 = 0
+score3 = 0
+score4 = 0
+
+s0={1,1,1,1,1,0,1}
+s1={0,0,1,1,0,0,0}
+s2={0,1,1,0,1,1,1}
+s3={0,0,1,1,1,1,1}
+s4={1,0,1,1,0,1,0}
+s5={1,0,0,1,1,1,1}
+s6={1,1,0,1,1,1,1}
+s7={0,0,1,1,1,0,0}
+s8={1,1,1,1,1,1,1}
+s9={1,0,1,1,1,1,1}
+s={s0,s1,s2,s3,s4,s5,s6,s7,s8,s9}
+for j = 0,6,1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+b = sim.getObject('./G_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+d = sim.getObject('./_R['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+c = sim.getObject('./R_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+end
+function sysCall_actuation()
+result = sim.readProximitySensor(sensor)
+print(s[i])
+if(result&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score1 = score1 + 1
+if (score1 &lt;= 9) then
+i = score1 +1
+
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score1 &gt; 9 and score2&lt;=9) then
+score1 = 0
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+score2 = score2 + 1
+i = score2 +1
+
+for j = 0, 6, 1 do
+b = sim.getObject('./G_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+else
+sim.pauseSimulation()
+end
+end
+result2 = sim.readProximitySensor(sensor2)
+if(result2&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score3 = score3 + 1
+
+if (score3 &lt;= 9) then
+i = score3 +1
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score3 &gt; 9 and score4&lt;=9) then
+score3 = 0
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+score4 = score4 + 1
+
+i = score4 +1
+for j = 0, 6, 1 do
+d = sim.getObject('./R_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+else
+sim.pauseSimulation()
+end
+end
+end
+</pre>
+<hr/>
+<p>問題區</p>
 <p>5/5加入第一版記分板</p>
 <p>問題1:第一版記分板顯示異常，每次進球後記分板，只會閃爍一格。</p>
 <p>問題2:車子進球門，也會計分。</p>
-<p>*(影片)*</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/QQ8k-o1Lhpc" title="YouTube video player" width="560"></iframe></p>
 <p>5/11第二版記分板</p>
-<p>解決問題:1.第二版改善了第一版的顯示異常，能夠正常做動。</p>
-<p>保留問題:1.車子與球進球會計分，還沒改善。</p>
-<p>*(影片)*</p>
-<p></p><h1>w9</h1>
+<p>解決問題:第二版改善了第一版的顯示異常，能夠正常做動。</p>
+<p>保留問題:車子與球進球會計分，還沒改善。</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/QigwOlBsaVw" title="YouTube video player" width="560"></iframe></p><h2>補充</h2>
+<p>記分板設計位置</p>
+<p>板子</p>
+<p><img alt="" height="295" src="/images/W13-記分板尺寸-.png" width="447"/></p>
+<p>七段顯示1</p>
+<p><img alt="" height="290" src="/images/W13-記分板1.png" width="452"/></p>
+<p><span>七段顯示2</span></p>
+<p><img alt="" height="297" src="/images/W13-記分板2.png" width="452"/></p>
+<p><span>七段顯示3</span></p>
+<p><img alt="" height="307" src="/images/W13-記分板3.png" width="451"/></p>
+<p><span>七段顯示4</span></p>
+<p><img alt="" height="306" src="/images/W13-記分板4.png" width="450"/></p>
+<p><span>七段顯示5</span></p>
+<p><img alt="" height="295" src="/images/W13-記分板5.png" width="450"/></p>
+<p><span>七段顯示6</span></p>
+<p><img alt="" height="300" src="/images/W13-記分板6.png" width="449"/></p>
+<p><span>七段顯示7</span></p>
+<p><img alt="" height="310" src="/images/W13-記分板7.png" width="452"/></p>
+<p>程式解釋</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+bubbleRob1 = sim.getObject('./bubbleRob1')
+bubbleRob2 = sim.getObject('./bubbleRob2')
+sensor = sim.getObject('./sensor')
+sensor2 = sim.getObject('./sensor2')
+ball = sim.getObject('./ball')
+
+pos1 = {-1,0,0.15}
+pos2 = {1,0,0.15}
+posS = {0,0,0.15}
+ang1 = {0,0,0}
+ang2 = {0,0,3.14}
+bubbleRobBase = 4
+initialBubbleRobPosition = sim.getObjectPosition(bubbleRobBase, -1)
+initialBubbleRobOrientation = sim.getObjectOrientation(bubbleRobBase, -1)
+initialballPosition = sim.getObjectPosition(ball, -1)
+initialballOrientation = sim.getObjectOrientation(ball, -1)
+
+count = 14400
+score1 = 0
+score2 = 0
+score3 = 0
+score4 = 0
+
+s0={1,1,1,1,1,0,1}
+s1={0,0,1,1,0,0,0}
+s2={0,1,1,0,1,1,1}
+s3={0,0,1,1,1,1,1}
+s4={1,0,1,1,0,1,0}
+s5={1,0,0,1,1,1,1}
+s6={1,1,0,1,1,1,1}
+s7={0,0,1,1,1,0,0}
+s8={1,1,1,1,1,1,1}
+s9={1,0,1,1,1,1,1}
+s={s0,s1,s2,s3,s4,s5,s6,s7,s8,s9}
+for j = 0,6,1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+b = sim.getObject('./G_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+d = sim.getObject('./_R['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+c = sim.getObject('./R_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+end
+function sysCall_actuation()
+result = sim.readProximitySensor(sensor)
+print(s[i])
+if(result&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score1 = score1 + 1
+if (score1 &lt;= 9) then
+i = score1 +1
+
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score1 &gt; 9 and score2&lt;=9) then
+score1 = 0
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+score2 = score2 + 1
+i = score2 +1
+
+for j = 0, 6, 1 do
+b = sim.getObject('./G_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+else
+sim.pauseSimulation()
+end
+end
+result2 = sim.readProximitySensor(sensor2)
+if(result2&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score3 = score3 + 1
+
+if (score3 &lt;= 9) then
+i = score3 +1
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score3 &gt; 9 and score4&lt;=9) then
+score3 = 0
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+score4 = score4 + 1
+
+i = score4 +1
+for j = 0, 6, 1 do
+d = sim.getObject('./R_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+else
+sim.pauseSimulation()
+end
+end
+end
+</pre>
+<h1>w9</h1>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5jE7ENssbcY" title="YouTube video player" width="560"></iframe>1</p>
 <h2>40723217-w9</h2>
 <p>今日我使用了chatgpt幫助我解決了操作上的問題，以下是我所有解決chatgpt的總整理:</p>
@@ -452,7 +817,204 @@ sim.setObjectOrientation(objectHandle, -1, ang)</pre>
 <p>5/10 可攜依舊有問題，只能亂修(之前明明就有載模組，但每次重開模組就消失，這次想載也看不懂出錯在哪</p>
 <p><img alt="" height="297" src="/images/W11-可攜又壞了.png" width="642"/></p>
 <p></p>
-<h1>Scenes</h1>
+<h1>w12</h1>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/4IurfQP8U1Q" title="YouTube video player" width="560"></iframe></p>
+<p><a href="/downloads/zmq_bubbleRob_red_green_board.ttt">瀏覽器中計分板設計.ttt檔</a></p>
+<hr/>
+<p>分工情況:</p>
+<p>40723217：<span>虛擬主機連線，</span>進球、位置重置程式設計</p>
+<p>40923219：記分板程式修改、影片，<span>報告</span></p>
+<p>40923225：場景球場繪製，虛擬主機連線，報告</p>
+<p>40923246：場景記分板繪製﹐記分板程式設計</p>
+<p>場景</p>
+<p>在solidworks繪製</p>
+<p><img alt="" height="326" src="/images/W13-場景.png" width="660"/></p>
+<p><a href="/downloads/01111.STL">場景.STL檔</a></p>
+<p>記分板</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/mhgDF8kXEXE" title="YouTube video player" width="560"></iframe></p>
+<p>使用<strong>CoppeliaSim</strong>繪製記分板</p>
+<p><img alt="" height="309" src="/images/W13-記分板尺寸.png" width="561"/></p>
+<p><span><a href="/downloads/board_test.ttt">記分板.ttt檔</a></span></p>
+<p><span>程式</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
+bubbleRob1 = sim.getObject('./bubbleRob1')
+bubbleRob2 = sim.getObject('./bubbleRob2')
+sensor = sim.getObject('./sensor')
+sensor2 = sim.getObject('./sensor2')
+ball = sim.getObject('./ball')
+
+pos1 = {-1,0,0.15}
+pos2 = {1,0,0.15}
+posS = {0,0,0.15}
+ang1 = {0,0,0}
+ang2 = {0,0,3.14}
+bubbleRobBase = 4
+initialBubbleRobPosition = sim.getObjectPosition(bubbleRobBase, -1)
+initialBubbleRobOrientation = sim.getObjectOrientation(bubbleRobBase, -1)
+initialballPosition = sim.getObjectPosition(ball, -1)
+initialballOrientation = sim.getObjectOrientation(ball, -1)
+
+count = 14400
+score1 = 0
+score2 = 0
+score3 = 0
+score4 = 0
+
+s0={1,1,1,1,1,0,1}
+s1={0,0,1,1,0,0,0}
+s2={0,1,1,0,1,1,1}
+s3={0,0,1,1,1,1,1}
+s4={1,0,1,1,0,1,0}
+s5={1,0,0,1,1,1,1}
+s6={1,1,0,1,1,1,1}
+s7={0,0,1,1,1,0,0}
+s8={1,1,1,1,1,1,1}
+s9={1,0,1,1,1,1,1}
+s={s0,s1,s2,s3,s4,s5,s6,s7,s8,s9}
+for j = 0,6,1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+b = sim.getObject('./G_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+d = sim.getObject('./_R['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+for j = 0,6,1 do
+c = sim.getObject('./R_['..j..']')
+if (s[1][j+1]==1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+end
+function sysCall_actuation()
+result = sim.readProximitySensor(sensor)
+print(s[i])
+if(result&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score1 = score1 + 1
+if (score1 &lt;= 9) then
+i = score1 +1
+
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score1 &gt; 9 and score2&lt;=9) then
+score1 = 0
+for j = 0, 6, 1 do
+a = sim.getObject('./_G['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(a, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+score2 = score2 + 1
+i = score2 +1
+
+for j = 0, 6, 1 do
+b = sim.getObject('./G_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 0, 0})
+else
+sim.setShapeColor(b, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+else
+sim.pauseSimulation()
+end
+end
+result2 = sim.readProximitySensor(sensor2)
+if(result2&gt;0)then
+sim.setObjectPosition(ball, -1, initialballPosition)
+sim.setObjectOrientation(ball, -1, initialballOrientation)
+sim.setObjectPosition(bubbleRob1, -1, pos1)
+sim.setObjectPosition(bubbleRob2, -1, pos2)
+sim.setObjectOrientation(bubbleRob1, -1, ang1)
+sim.setObjectOrientation(bubbleRob2, -1, ang2)
+score3 = score3 + 1
+
+if (score3 &lt;= 9) then
+i = score3 +1
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+
+
+elseif (score3 &gt; 9 and score4&lt;=9) then
+score3 = 0
+for j = 0, 6, 1 do
+c = sim.getObject('./_R['..j..']')
+if (s[1][j+1] == 1) then
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(c, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+score4 = score4 + 1
+
+i = score4 +1
+for j = 0, 6, 1 do
+d = sim.getObject('./R_['..j..']')
+if (s[i][j+1] == 1) then
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {0, 1, 0})
+else
+sim.setShapeColor(d, nil, sim.colorcomponent_ambient_diffuse, {1, 1, 1})
+end
+end
+else
+sim.pauseSimulation()
+end
+end
+end
+</pre>
+<hr/>
+<p>問題區</p>
+<p>5/5加入第一版記分板</p>
+<p>問題1:第一版記分板顯示異常，每次進球後記分板，只會閃爍一格。</p>
+<p>問題2:車子進球門，也會計分。</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/QQ8k-o1Lhpc" title="YouTube video player" width="560"></iframe></p>
+<p>5/11第二版記分板</p>
+<p>解決問題:第二版改善了第一版的顯示異常，能夠正常做動。</p>
+<p>保留問題:車子與球進球會計分，還沒改善。</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/QigwOlBsaVw" title="YouTube video player" width="560"></iframe></p><h1>Scenes</h1>
 <p><iframe height="800" src="http://127.0.0.1:23020" width="600"></iframe></p>
 <h1>Brython</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
