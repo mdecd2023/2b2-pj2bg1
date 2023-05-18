@@ -160,7 +160,16 @@ img.add_border {
 <p><span>七段顯示7</span></p>
 <p><img alt="" height="310" src="./../images/W13-記分板7.png" width="452"/></p>
 <p>程式解釋</p>
-<p>施工中...</p>
+<p>世界位置座標程式</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">pos = {x,y,z}
+sim.setObjectPosition(objectHandle, -1, pos)
+</pre>
+<p>世界迴轉座標程式</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">ang = {0,0,angle}
+sim.setObjectOrientation(objectHandle, -1, ang)
+</pre>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">
+</pre>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
 bubbleRob1 = sim.getObject('./bubbleRob1')
 bubbleRob2 = sim.getObject('./bubbleRob2')
