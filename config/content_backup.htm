@@ -223,6 +223,14 @@ end
 <p><span>七段顯示7</span></p>
 <p><img alt="" height="310" src="/images/W13-記分板7.png" width="452"/></p>
 <p>程式解釋</p>
+<p>世界位置座標程式</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">pos = {x,y,z}
+sim.setObjectPosition(objectHandle, -1, pos)
+</pre>
+<p>世界迴轉座標程式</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">ang = {0,0,angle}
+sim.setObjectOrientation(objectHandle, -1, ang)
+</pre>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">function sysCall_init()
 bubbleRob1 = sim.getObject('./bubbleRob1')
 bubbleRob2 = sim.getObject('./bubbleRob2')
@@ -391,8 +399,7 @@ sim.pauseSimulation()
 end
 end
 end
-</pre>
-<h1>w9</h1>
+</pre><h1>w9</h1>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5jE7ENssbcY" title="YouTube video player" width="560"></iframe>1</p>
 <h2>40723217-w9</h2>
 <p>今日我使用了chatgpt幫助我解決了操作上的問題，以下是我所有解決chatgpt的總整理:</p>
