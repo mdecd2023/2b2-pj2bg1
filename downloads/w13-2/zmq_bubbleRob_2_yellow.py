@@ -6,8 +6,6 @@ client = RemoteAPIClient('localhost', 23000)
 
 print('Program started')
 sim = client.getObject('sim')
-sim.startSimulation()
-print('Simulation started')
 
 def setBubbleRobVelocity(leftWheelVelocity, rightWheelVelocity):
     leftMotor = sim.getObject('/leftMotor2')
